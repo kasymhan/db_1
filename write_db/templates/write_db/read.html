@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    READ
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'read' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            {{ field.label }}
+            {{ field }}
+            {% if field.errors != 'нет такого пользователь' %}
+                <div  class="alert alert-light" role="alert">
+                    <h2 class="active"> {{ field.errors }}</h2>
+                    </div>
+            {% endif %}
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
