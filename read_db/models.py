@@ -29,7 +29,7 @@ class BlogApplication(models.Model):
 
 class BlogArea(models.Model):
     name = models.TextField()
-    out_id = models.IntegerField()
+    out= models.IntegerField()
 
 
     def __str__(self):
@@ -38,7 +38,7 @@ class BlogArea(models.Model):
 
 class BlogCity(models.Model):
     name = models.TextField()
-    out_id = models.IntegerField()
+    out= models.IntegerField()
 
 
     def __str__(self):
@@ -47,7 +47,7 @@ class BlogCity(models.Model):
 
 class BlogCountr(models.Model):
     name = models.TextField()
-    out_id = models.IntegerField()
+    out= models.IntegerField()
 
 
     def __str__(self):
@@ -56,7 +56,7 @@ class BlogCountr(models.Model):
 
 class BlogFacully(models.Model):
     name = models.TextField()
-    out_id = models.IntegerField()
+    out = models.IntegerField()
 
 
     def __str__(self):
@@ -64,7 +64,7 @@ class BlogFacully(models.Model):
 
 class BlogRegion(models.Model):
     name = models.TextField()
-    out_id = models.IntegerField()
+    out = models.IntegerField()
 
     def __str__(self):
         return self.name
@@ -73,7 +73,7 @@ class BlogRegion(models.Model):
 class BlogSpecial(models.Model):
     name = models.TextField()
     fac = models.OneToOneField('BlogFacully', on_delete=models.DO_NOTHING, unique=True)
-    out_id = models.IntegerField()
+    out = models.IntegerField()
 
 
     def __str__(self):

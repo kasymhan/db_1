@@ -39,6 +39,13 @@ class Write(forms.ModelForm):
             region = read_db.models.BlogRegion.objects.filter(id=lis[3]).values()
             area = read_db.models.BlogArea.objects.filter(id=lis[4]).values()
             city = read_db.models.BlogCity.objects.filter(id=lis[5]).values()
+            app = read_db.models.BlogApplication.objects.filter(abiturient=lis[1]).values()
+            lis_app = [
+                app[0][' enlisted '],
+                app[0]['abiturient'],
+                app[0][' special '],
+
+            ]
             lis_countr = [
                 countr[0]['name'],
                 countr[0]['out'],
@@ -55,28 +62,25 @@ class Write(forms.ModelForm):
                 city[0]['name'],
                 city[0]['out'],
             ]
-            special = read_db.models.BlogSpecial.objects.filter(out=lis_city[1]).values()[0]
+            special = read_db.models.BlogSpecial.objects.filter(id=lis_app[2]).values()[0]
             lis_special = [
-                special['id'],
                 special['name'],
                 special['fac_id'],
+                special['out'],
 
             ]
-            fac = read_db.models.BlogFacully.objects.filter(id=lis_special[2]).values()[0]
+            fac = read_db.models.BlogFacully.objects.filter(id=lis_special[1]).values()[0]
             lis_fac = [
+                fac['out'],
                 fac['name']
 
-            ]
-            app = read_db.models.BlogApplication.objects.filter(special=lis[0]).values()[0]
-            lis_app = [
-                app['enlisted']
             ]
             creat_area = write_db.models.BlogArea.objects.using('user').create(id=lis_area[1],name=lis_area[0])
             create_region = write_db.models.BlogRegion.objects.using('user').create(id=lis_region[1], name=lis_region[0]).save()
             creat_city = write_db.models.BlogCity.objects.using('user').create(id=lis_city[1], name=lis_city[0]).save()
             creat_countr = write_db.models.BlogCountr.objects.using('user').create(id=lis_countr[1], name=lis_countr[0]).save()
-            creat_fac = write_db.models.BlogFacully.objects.using('user').create(id=lis_fac[1], name=lis_fac[0]).save()
-            creat_special = write_db.models.BlogSpecial.objects.using('user').create(id=lis_special[1],name=lis_special[1],fac=creat_fac)
+            creat_fac = write_db.models.BlogFacully.objects.using('user').create(id=lis_fac[0], name=lis_fac[1]).save()
+            creat_special = write_db.models.BlogSpecial.objects.using('user').create(id=lis_special[2],name=lis_special[0],fac=creat_fac)
             creat_ab = write_db.models.BlogAbiturient.objects.using('user').create(name=lis[1],
                                                                                    area=creat_area,
                                                                                    city=creat_city,
